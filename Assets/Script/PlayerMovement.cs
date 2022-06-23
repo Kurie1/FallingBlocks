@@ -6,8 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private float bound;
     private float objectScale;
+    private bool endGame = false;
 
     public float PlayerSpeed = 5f;
+    public GameObject SpawnerObject;
+    public GameObject GameOverUI;
+
 
     void Start()
     {
@@ -16,10 +20,14 @@ public class PlayerMovement : MonoBehaviour
         float width = height * cam.aspect;
         bound = width / 2;
         objectScale= transform.localScale.x;
+        
     }
 
     void Update()
     {
+        if (endGame)
+            return;
+
         if (transform.position.x + objectScale / 2 < bound)
         {
             if (Input.GetKey(KeyCode.RightArrow))
@@ -47,6 +55,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void LoseGame()
     {
+        Spawner spawner= SpawnerObject.GetComponent<Spawner>();
+        spawner.enabled = false;
 
+
+        CanvasGroup canvasGroup = GameOverUI.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1;
+
+        endGame = true;
     }
 }
