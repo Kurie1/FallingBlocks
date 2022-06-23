@@ -5,21 +5,17 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject FallingBlockPrefab;
-    public float secondbetweenSpawns = 0.5f;
-    float nextSpawnsTime;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float SecondBetweenSpawns = 0.5f;
+    public float Range = -2.5f;
 
-    // Update is called once per frame
+    private float nextSpawnTime;
+    
     void Update()
     {
-        if (Time.time > nextSpawnsTime)
+        if (Time.time > nextSpawnTime)
         {
-            nextSpawnsTime = Time.time + secondbetweenSpawns;
-            Vector2 SpawnPosition = new Vector2(Random.Range(-2.5f, 2.5f), 7);
+            nextSpawnTime = Time.time + SecondBetweenSpawns;
+            Vector2 SpawnPosition = new Vector2(Random.Range(-Range, Range), transform.position.y);
             Instantiate(FallingBlockPrefab, SpawnPosition, Quaternion.identity);
         }
     }
