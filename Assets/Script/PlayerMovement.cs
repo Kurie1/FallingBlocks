@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -25,8 +26,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Space) && endGame == true)
+        {
+            StartGame();
+        }
+
         if (endGame)
             return;
+      
 
         if (transform.position.x + objectScale / 2 < bound)
         {
@@ -43,13 +50,15 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = Vector2.Lerp(transform.position, transform.position - transform.right, PlayerSpeed * Time.deltaTime);
             }
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         LoseGame();
 
-        
+        TMP_Text text = SpawnerObject.GetComponent<TMP_Text>();
+        text.text = Time.time.ToString();
     }
 
 
@@ -63,5 +72,15 @@ public class PlayerMovement : MonoBehaviour
         canvasGroup.alpha = 1;
 
         endGame = true;
+    }
+    private void StartGame()
+    {
+        endGame = false;
+        Spawner spawner = SpawnerObject.GetComponent<Spawner>();
+        spawner.enabled = true;
+        CanvasGroup canvasGroup = GameOverUI.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+
+
     }
 }
