@@ -7,11 +7,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private float bound;
     private float objectScale;
-    private bool endGame = false;
 
+    public GameObject Score;
+    public GameObject GameController;
     public float PlayerSpeed = 5f;
-    public GameObject SpawnerObject;
-    public GameObject GameOverUI;
+    
+    
 
 
     void Start()
@@ -26,13 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && endGame == true)
-        {
-            StartGame();
-        }
 
-        if (endGame)
-            return;
+            
+        
       
 
         if (transform.position.x + objectScale / 2 < bound)
@@ -52,35 +49,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        LoseGame();
+        GameController lose = GameController.GetComponent<GameController>();
+        lose.enabled = true;
 
-        TMP_Text text = SpawnerObject.GetComponent<TMP_Text>();
-        text.text = Time.time.ToString();
-    }
-
-
-    private void LoseGame()
-    {
-        Spawner spawner= SpawnerObject.GetComponent<Spawner>();
-        spawner.enabled = false;
-
-
-        CanvasGroup canvasGroup = GameOverUI.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 1;
-
-        endGame = true;
-    }
-    private void StartGame()
-    {
-        endGame = false;
-        Spawner spawner = SpawnerObject.GetComponent<Spawner>();
-        spawner.enabled = true;
-        CanvasGroup canvasGroup = GameOverUI.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
-
+        TMP_Text text = Score.GetComponent<TMP_Text>();
+        string timeScore = Time.time.ToString();
+        text.text = timeScore;
 
     }
 }
+
+
+
+
+
+
+
