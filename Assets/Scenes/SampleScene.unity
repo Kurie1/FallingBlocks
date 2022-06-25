@@ -147,14 +147,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131373296}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83526bbdf79cee94aba6e593386dda96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnerObject: {fileID: 593054568}
-  GameOverUI: {fileID: 870011603}
-  Player: {fileID: 837065240}
+  playerMovementScript: {fileID: 837065243}
 --- !u!4 &131373298
 Transform:
   m_ObjectHideFlags: 0
@@ -301,6 +299,7 @@ MonoBehaviour:
   FallingBlockPrefab: {fileID: 5994816614791955006, guid: 84ee2ff9c0fbe5946ae74af08c16815f, type: 3}
   SecondBetweenSpawns: 0.5
   Range: -2.5
+  GameControllerScript: {fileID: 131373297}
 --- !u!1 &837065240
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,9 +399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2ae1834823a5247bcc7e593c07b41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: {fileID: 1755268582}
-  GameController: {fileID: 131373296}
   PlayerSpeed: 7
+  GameControllerScript: {fileID: 131373297}
 --- !u!61 &837065244
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -463,6 +461,7 @@ GameObject:
   - component: {fileID: 870011605}
   - component: {fileID: 870011604}
   - component: {fileID: 870011608}
+  - component: {fileID: 870011609}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -566,6 +565,20 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &870011609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870011603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4597e1f24de6c4699205d6cfa8dcb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameControllerScript: {fileID: 131373297}
+  scoreText: {fileID: 1755268584}
 --- !u!1 &1504881372
 GameObject:
   m_ObjectHideFlags: 0
