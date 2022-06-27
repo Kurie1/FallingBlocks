@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,18 +9,30 @@ public class UIController : MonoBehaviour
 
     public GameController GameControllerScript;
     public TMP_Text scoreText;
+    public Spawner SpawnerScript;
 
     private float scoreCounter = 0;
+    private bool isLoseGame =false;
     
     void Start()
     {
         GameControllerScript.OnGameLose += OnGameLose;
         GameControllerScript.OnGameRestart += OnGameRestart;
+
+        SpawnerScript.Score += Score;
         scoreCounter = 0;
+
     }
+
+
     private void Update()
     {
-        scoreCounter += Time.deltaTime;
+        
+    }
+
+    private void Score()
+    {   if(!isLoseGame)
+        scoreCounter++;
     }
 
     private void OnGameRestart()
@@ -39,11 +52,13 @@ public class UIController : MonoBehaviour
         {
             canvasGroup.alpha = 1;
             scoreText.text = scoreCounter.ToString();
+            isLoseGame = true;
         }
         else
         {
             canvasGroup.alpha = 0;
             scoreCounter = 0;
+            isLoseGame = false;
         }
     }
 }

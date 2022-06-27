@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     public float SecondBetweenSpawns = 0.5f;
     public float Range = -2.5f;
     public GameController GameControllerScript;
+    public Action Score;
 
     private bool isLoseGame;
     private float nextSpawnTime;
@@ -32,6 +33,10 @@ public class Spawner : MonoBehaviour
         GameControllerScript.OnGameLose += OnGameLose;
         GameControllerScript.OnGameRestart += OnGameRestart;
     }
+    private void Delete() {
+
+        Score?.Invoke();
+        } 
 
     private void OnGameRestart()
     {
@@ -52,11 +57,15 @@ public class Spawner : MonoBehaviour
             {
                 spawnBlocks.Dequeue();
                 Destroy(firstBlock);
+                Delete();
             }
         }
 
         if (isLoseGame)
+        {
             return;
+        }
+           
 
         if (Time.time > nextSpawnTime)
         {
